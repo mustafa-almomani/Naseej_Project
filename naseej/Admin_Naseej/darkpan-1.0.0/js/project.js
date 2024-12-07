@@ -48,7 +48,7 @@ function parseJwt(token) {
         cardContainer.innerHTML += `
             <div class="col-xl-4 col-md-6 mb-4">
                 <div class="card service-card shadow h-100">
-                    <img src="http://localhost:25025/project/${product.projectImage}" class="card-img-top" alt="Service Image">
+                    <img src="http://localhost:25025/project/${product.projectImage}" class="card-img-top" alt="project Image">
                     <div class="card-body">
                         <h5 class="card-title">${product.projectName}</h5>
                         <p class="card-text"><strong>Description:</strong> ${product.projectDescription}</p>
@@ -106,18 +106,18 @@ const url = "http://localhost:25025/api/project/addnewproject";
     if (response.ok) {
         Swal.fire({
             title: "Success!",
-            text: "Service has been added successfully",
+            text: "project has been added successfully",
             icon: "success",
             confirmButtonText: "OK",
             timer: 3000,
         });
         setTimeout(() => {
-            window.location.href = "table.html";
+            window.location.href = "project.html";
         }, 2000);
     } else {
         Swal.fire({
             title: "Error!",
-            text: "Service has not been added",
+            text: "project has not been added",
             icon: "error",
             confirmButtonText: "OK",
         });
@@ -198,7 +198,7 @@ const url = "http://localhost:25025/api/project/addnewproject";
         if (response.ok) {
           await Swal.fire({
             title: "Success!",
-            text: "service updated successfully.",
+            text: "project updated successfully.",
             icon: "success",
           });
       
@@ -211,7 +211,7 @@ const url = "http://localhost:25025/api/project/addnewproject";
           const errorMessage = await response.text();
           await Swal.fire({
             title: "Error!",
-            text: `Failed to update service: ${errorMessage}`,
+            text: `Failed to update project: ${errorMessage}`,
             icon: "error",
           });
         }
@@ -238,8 +238,12 @@ const url = "http://localhost:25025/api/project/addnewproject";
         });
       
         if (response.status == 200) {
-          alert("Status updated successfully");
-      
+          Swal.fire({
+            title: "Success!",
+            text: "Status updated successfully",
+            icon: "success",
+            confirmButtonText: "OK",
+          });      
           // تحديث الحالة في allOrders وتحديث الواجهة
           let order = allOrders.find((order) => order.projectId === id);
           if (order) {
@@ -249,8 +253,12 @@ const url = "http://localhost:25025/api/project/addnewproject";
           // عرض الطلبات من جديد بناءً على الحالة الجديدة
           displayOrders(allOrders);
         } else {
-          alert("Error updating status");
-        }
+          Swal.fire({
+            title: "Error!",
+            text: "Error updating status",
+            icon: "error",
+            confirmButtonText: "Try Again",
+          });        }
       }
     
     

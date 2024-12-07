@@ -487,9 +487,7 @@ async function addservice() {
     
   
   
-    
-  async function editstatus(id) {
-  
+    async function editstatus(id) {
       event.preventDefault();
       debugger;
       let urlm = `http://localhost:25025/api/services/editorder/${id}`;
@@ -506,21 +504,29 @@ async function addservice() {
       });
     
       if (response.status == 200) {
-        alert("Status updated successfully");
+        Swal.fire({
+          title: "Success!",
+          text: "Status updated successfully",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
     
-        // تحديث الحالة في allOrders وتحديث الواجهة
         let order = allOrders.find((order) => order.serviceId === id);
         if (order) {
           order.isAccept = newStatus;
         }
     
-        // عرض الطلبات من جديد بناءً على الحالة الجديدة
         displayOrders(allOrders);
       } else {
-        alert("Error updating status");
+        Swal.fire({
+          title: "Error!",
+          text: "Error updating status",
+          icon: "error",
+          confirmButtonText: "Try Again",
+        });
       }
     }
-  
+    
   
   
   
