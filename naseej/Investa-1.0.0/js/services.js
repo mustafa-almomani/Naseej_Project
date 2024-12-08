@@ -8,7 +8,7 @@ async function servicesuser() {
   
     data.forEach((product) => {
       card.innerHTML += `
-   <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.3s">
+   <div class="col-md-6 col-lg-4 col-xl-4 wow fadeInUp" data-wow-delay="0.3s">
     <div class="service-item bg-light rounded">
         <div class="service-img position-relative">
             <!-- الصورة -->
@@ -20,17 +20,18 @@ async function servicesuser() {
             </div>
         </div>
         <div class="service-content text-center p-4">
-            <div class="service-content-inner">
-                <a href="#" class="h4 mb-6 d-inline-flex text-start">
-                    <i class="fas fa-donate fa-2x me-2"></i>${product.serviceName}
-                </a>
-                <p class="mb-6">${product.serviceDescription}</p>
-                <a class="btn btn-light rounded-pill py-2 px-4" href="#" onclick="showServiceModal(${product.serviceId})" data-bs-toggle="modal">Apply</a>
+            <div class="service-content-inner d-flex flex-column justify-content-between" style="height: 100%;">
+                <div>
+                    <a href="#" class="h4 mb-6 d-inline-flex text-start">
+                        ${product.serviceName}
+                    </a>
+                    <p class="mb-6">${product.serviceDescription}</p>
+                </div>
+                <a class="btn btn-light rounded-pill py-2 px-4 mt-4" href="#" onclick="showServiceModal(${product.serviceId})" data-bs-toggle="modal">Apply</a>
             </div>
         </div>
     </div>
 </div>
-
 
 
 
@@ -61,10 +62,15 @@ async function showServiceModal(serviceId) {
     await Swal.fire({
       icon: "warning",
       title: "Login Required",
-      text: "You need to be logged in to submit a testimonial.",
+      text: "You need to be logged in to submit a Service.",
+      
     });
+    window.location.href = "Login.html";
+
     return; 
+
   }
+
 
   let decodedToken = parseJwt(token);
   
@@ -127,7 +133,7 @@ async function addorder() {
         await Swal.fire({
             icon: "warning",
             title: "Login Required",
-            text: "You need to be logged in to submit a testimonial.",
+            text: "You need to be logged in to submit a Services.",
         });
         return;
     }
@@ -190,25 +196,32 @@ async function servicehome() {
 
   data.forEach((product) => {
     card.innerHTML += `
-          <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.3s">
-                  <div class="service-item bg-light rounded">
-                      <div class="service-img">
-                          <img src="http://localhost:25025/Uploads/${product.serviceImage}" class="img-fluid w-100 rounded-top" alt="">
-                      </div>
-                      <div class="service-content text-center p-4">
-                          <div class="service-content-inner">
-                              <a href="#" class="h4 mb-6 d-inline-flex text-start"><i
-                                      class="fas fa-donate fa-2x me-2"></i>${product.serviceName}</a>
-                              <p class="mb-6">${product.serviceDescription}
-                              </p>
-                              <p>Age: ${product.fromage}&nbsp;&nbsp;-&nbsp;&nbsp;${product.toage}</p>
+<div class="col-md-6 col-lg-4 col-xl-4 wow fadeInUp" data-wow-delay="0.3s">
+    <div class="service-item bg-light rounded">
+        <div class="service-img position-relative">
+            <!-- الصورة -->
+            <img src="http://localhost:25025/Uploads/${product.serviceImage}" class="img-fluid w-100 rounded-top" alt="">
 
-                              <a class="btn btn-light rounded-pill py-2 px-4" href="#" onclick="showServiceModal(${product.serviceId})"  data-bs-toggle="modal" >Apply</a>
+            <!-- العمر -->
+            <div class="age-overlay position-absolute">
+                Age: ${product.fromage} - ${product.toage}
+            </div>
+        </div>
+        <div class="service-content text-center p-4">
+            <div class="service-content-inner d-flex flex-column justify-content-between" style="height: 100%;">
+                <div>
+                    <a href="#" class="h4 mb-6 d-inline-flex text-start">
+                        ${product.serviceName}
+                    </a>
+                    <p class="mb-6">${product.serviceDescription}</p>
+                </div>
+                <a class="btn btn-light rounded-pill py-2 px-4 mt-4" href="#" onclick="showServiceModal(${product.serviceId})" data-bs-toggle="modal">Apply</a>
+            </div>
+        </div>
+    </div>
+</div>
 
-                          </div>
-                      </div>
-                  </div>
-              </div>
+
 
 
 

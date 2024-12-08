@@ -21,9 +21,7 @@ async function displayProjects() {
                                     <div class="project-icon mb-3"><i class="fas fa-signal fa-4x text-primary"></i></div>
                                     <p class="text-dark fs-5 mb-3">${project.projectName}</p>
                                     <a href="#" class="h4">${project.projectDescription}</a>
-                                    <div class="pt-4">
-                                        <a class="btn btn-light rounded-pill py-3 px-5" href="#">Read More</a>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
